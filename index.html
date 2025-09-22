@@ -52,10 +52,18 @@
             justify-content: space-between;
         }
         
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary);
+        }
+        
         .logo h1 {
-            font-size: 21px;
+            font-size: 28px;
             font-weight: 600;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            color: #000;
         }
         
         /* Navigation */
@@ -308,6 +316,10 @@
                 gap: 20px;
             }
             
+            .logo h1 {
+                font-size: 24px;
+            }
+            
             nav ul {
                 gap: 24px;
             }
@@ -348,7 +360,6 @@
         <div class="container">
             <div class="header-content">
                 <a href="#" class="logo">
-                    <div class="app-icon">I</div>
                     <h1>Interlish</h1>
                 </a>
                 <nav>
