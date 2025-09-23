@@ -37,10 +37,10 @@
         /* Header */
         header {
             border-bottom: 1px solid var(--border);
-            padding: 20px 0;
+            padding: 16px 0;
             position: sticky;
             top: 0;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             z-index: 100;
@@ -50,6 +50,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 20px;
         }
         
         .logo {
@@ -60,9 +61,9 @@
         }
         
         .logo h1 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 600;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
             color: #000;
         }
         
@@ -70,16 +71,19 @@
         nav ul {
             list-style: none;
             display: flex;
-            gap: 32px;
+            gap: 24px;
+            margin: 0;
+            padding: 0;
         }
         
         nav a {
             color: var(--secondary);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 400;
             transition: color 0.2s;
             position: relative;
+            padding: 4px 0;
         }
         
         nav a:hover {
@@ -93,7 +97,7 @@
         nav a.active::after {
             content: '';
             position: absolute;
-            bottom: -21px;
+            bottom: -20px;
             left: 0;
             right: 0;
             height: 1px;
@@ -102,7 +106,7 @@
         
         /* Main Content */
         main {
-            padding: 80px 0;
+            padding: 60px 0;
             min-height: calc(100vh - 200px);
         }
         
@@ -122,34 +126,34 @@
         
         /* Typography */
         h2 {
-            font-size: 48px;
+            font-size: 42px;
             font-weight: 600;
             letter-spacing: -1px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             line-height: 1.1;
         }
         
         h3 {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 600;
             letter-spacing: -0.5px;
-            margin-top: 56px;
+            margin-top: 48px;
             margin-bottom: 16px;
         }
         
         h4 {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 600;
-            margin-top: 32px;
+            margin-top: 28px;
             margin-bottom: 12px;
         }
         
         .subtitle {
-            font-size: 21px;
+            font-size: 19px;
             color: var(--secondary);
             font-weight: 400;
             line-height: 1.4;
-            margin-bottom: 48px;
+            margin-bottom: 36px;
         }
         
         p {
@@ -241,7 +245,11 @@
         /* FAQ Section */
         .faq-item {
             border-bottom: 1px solid var(--border);
-            padding: 24px 0;
+            padding: 20px 0;
+        }
+        
+        .faq-item:first-of-type {
+            padding-top: 0;
         }
         
         .faq-item:last-child {
@@ -251,10 +259,13 @@
         .faq-item h4 {
             color: var(--primary);
             margin: 0 0 8px 0;
+            font-size: 18px;
         }
         
         .faq-item p {
             margin: 0;
+            font-size: 16px;
+            line-height: 1.5;
         }
         
         /* Footer */
@@ -280,23 +291,24 @@
         .feature-pills {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin: 32px 0;
+            gap: 10px;
+            margin: 24px 0;
         }
         
         .pill {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
+            gap: 6px;
+            padding: 6px 12px;
             background: var(--hover);
-            border-radius: 20px;
-            font-size: 15px;
+            border-radius: 16px;
+            font-size: 14px;
             color: var(--primary);
         }
         
         .pill-icon {
             color: var(--accent);
+            font-size: 16px;
         }
         
         /* Links */
@@ -309,48 +321,130 @@
             text-decoration: underline;
         }
         
-        /* Mobile */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
+            header {
+                padding: 12px 0;
+            }
+            
+            .container {
+                padding: 0 16px;
+            }
+            
             .header-content {
-                flex-direction: column;
-                gap: 20px;
+                gap: 16px;
+                flex-wrap: nowrap;
             }
             
             .logo h1 {
-                font-size: 24px;
+                font-size: 20px;
+                white-space: nowrap;
+            }
+            
+            nav {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                flex: 1;
+                max-width: 60%;
             }
             
             nav ul {
-                gap: 24px;
+                gap: 20px;
+                white-space: nowrap;
+                padding-right: 10px;
+                justify-content: flex-end;
+            }
+            
+            nav a {
+                font-size: 14px;
+                white-space: nowrap;
             }
             
             nav a.active::after {
                 display: none;
             }
             
+            main {
+                padding: 32px 0;
+            }
+            
             h2 {
-                font-size: 36px;
+                font-size: 32px;
+                margin-bottom: 16px;
             }
             
             h3 {
-                font-size: 24px;
-                margin-top: 40px;
+                font-size: 22px;
+                margin-top: 32px;
             }
             
             .subtitle {
+                font-size: 17px;
+                margin-bottom: 32px;
+            }
+            
+            p, li {
+                font-size: 16px;
+            }
+            
+            .faq-item {
+                padding: 20px 0;
+            }
+            
+            .faq-item h4 {
                 font-size: 18px;
             }
             
-            main {
-                padding: 40px 0;
+            .contact-grid {
+                gap: 16px;
+            }
+            
+            .contact-card {
+                padding: 20px;
+            }
+            
+            footer {
+                padding: 24px 0;
             }
         }
         
         @media (max-width: 480px) {
+            .header-content {
+                align-items: center;
+            }
+            
+            .logo h1 {
+                font-size: 18px;
+            }
+            
+            nav {
+                max-width: 55%;
+            }
+            
             nav ul {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
+                gap: 14px;
+            }
+            
+            nav a {
+                font-size: 13px;
+            }
+            
+            h2 {
+                font-size: 28px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+            }
+            
+            .feature-pills {
+                gap: 8px;
+                margin: 20px 0;
+            }
+            
+            .pill {
+                font-size: 13px;
+                padding: 5px 10px;
             }
         }
     </style>
@@ -394,6 +488,10 @@
                         <span class="pill-icon">📈</span>
                         <span>Progress Tracking</span>
                     </div>
+                    <div class="pill">
+                        <span class="pill-icon">🎯</span>
+                        <span>Personalized Learning</span>
+                    </div>
                 </div>
                 
                 <h3>Frequently Asked Questions</h3>
@@ -405,7 +503,7 @@
                 
                 <div class="faq-item">
                     <h4>What's included in Premium?</h4>
-                    <p>Premium unlocks all episodes and background playback. New content is added weekly.</p>
+                    <p>Premium unlocks all episodes, background playback, offline downloads, and unlimited dictation practice. New content is added weekly.</p>
                 </div>
                 
                 <div class="faq-item">
@@ -414,8 +512,13 @@
                 </div>
                 
                 <div class="faq-item">
+                    <h4>Can I use Interlish offline?</h4>
+                    <p>Yes. Download episodes while connected to Wi-Fi and enjoy them anywhere, anytime.</p>
+                </div>
+                
+                <div class="faq-item">
                     <h4>Is my progress synced across devices?</h4>
-                    <p>Your learning progress is automatically synced when you sign in with the same account on multiple devices.</p>
+                    <p>Your learning progress is saved locally on your device for privacy and performance.</p>
                 </div>
             </div>
             
@@ -443,7 +546,7 @@
                 <p>All content including audio, text, and visual materials are owned by Interlish or licensed to us. You may not copy, distribute, or create derivative works from our content.</p>
                 
                 <h3>Account Responsibilities</h3>
-                <p>You are responsible for maintaining the security of your account and for all activities under your account.</p>
+                <p>You are responsible for maintaining the security of your device and app data. Users must be 13 years or older.</p>
                 
                 <h3>Service Availability</h3>
                 <p>We strive to maintain service availability but do not guarantee uninterrupted access. We may modify or discontinue features with reasonable notice.</p>
@@ -458,7 +561,7 @@
                 <p>These terms are governed by applicable local laws without regard to conflict of law principles.</p>
                 
                 <h3>Contact</h3>
-                <p>Questions about these terms? Email <a href="mailto:interlish9@gmail.com">legal@interlish.app</a></p>
+                <p>Questions about these terms? Email <a href="mailto:interlish9@gmail.com">interlish9@gmail.com</a></p>
             </div>
             
             <!-- Privacy Section -->
@@ -468,51 +571,61 @@
                 
                 <h3>Information We Collect</h3>
                 
-                <h4>Account Information</h4>
-                <p>Email address, username, and profile information you provide.</p>
+                <h4>Learning Progress (Device Only)</h4>
+                <p>Your learning data including progress, favorites, and completed episodes are stored locally on your device.</p>
                 
-                <h4>Usage Data</h4>
-                <p>Learning progress, episodes played, features used, and app performance data.</p>
+                <h4>Subscription Information</h4>
+                <p>Purchase history managed by RevenueCat for subscription services.</p>
                 
-                <h4>Device Information</h4>
-                <p>Device type, operating system, and app version for compatibility and improvements.</p>
+                <h4>Content Access</h4>
+                <p>We access Firebase to retrieve episode content (read-only, no user data uploaded).</p>
+                
+                <h3>Information We DO NOT Collect</h3>
+                <ul>
+                    <li>Personal identifying information (name, email, phone)</li>
+                    <li>Location data</li>
+                    <li>Contacts or address book</li>
+                    <li>Advertising identifiers</li>
+                    <li>Analytics or tracking data</li>
+                </ul>
                 
                 <h3>How We Use Information</h3>
                 <ul>
-                    <li>Provide and personalize your learning experience</li>
-                    <li>Track progress and generate statistics</li>
-                    <li>Send important service updates</li>
-                    <li>Improve app performance and features</li>
-                    <li>Respond to support requests</li>
+                    <li>Provide app functionality and content</li>
+                    <li>Process subscription payments</li>
+                    <li>Store learning progress locally on your device</li>
                 </ul>
                 
                 <h3>Data Security</h3>
-                <p>We use industry-standard encryption and security measures to protect your data.</p>
+                <p>Your learning data is stored securely on your device using iOS standard encryption. We do not have access to this data.</p>
                 
                 <h3>Third-Party Services</h3>
                 <ul>
-                    <li><strong>Firebase:</strong> Secure data storage and authentication</li>
+                    <li><strong>Firebase:</strong> Content delivery only (no user data storage)</li>
                     <li><strong>RevenueCat:</strong> Subscription management</li>
                     <li><strong>Apple:</strong> Payment processing</li>
                 </ul>
                 
                 <h3>Your Rights</h3>
-                <p>You can request to access, correct, or delete your personal data. You may also export your learning data or close your account at any time.</p>
+                <p>Since your data is stored locally, you have full control. You can clear all data through the app's Settings → Data Management section.</p>
                 
                 <h3>Data Sharing</h3>
-                <p>We never sell your personal information. We share data only when required by law or with your explicit consent.</p>
+                <p>We do not collect or share personal information. Subscription data is handled by Apple and RevenueCat according to their privacy policies.</p>
+                
+                <h3>Children's Privacy</h3>
+                <p>Interlish is not intended for children under 13. We do not knowingly collect data from children under 13 years of age.</p>
                 
                 <h3>International Users</h3>
-                <p>Data may be processed in countries other than your own. We ensure appropriate safeguards for international data transfers.</p>
+                <p>The app operates the same way globally with all user data stored locally on your device.</p>
                 
                 <h3>California Privacy Rights</h3>
-                <p>California residents have additional rights under CCPA including the right to know what data is collected and request deletion.</p>
+                <p>California residents: We do not collect personal information that would be subject to CCPA requirements.</p>
                 
                 <h3>Updates</h3>
                 <p>We may update this policy periodically. Material changes will be notified through the app.</p>
                 
                 <h3>Contact</h3>
-                <p>Privacy questions? Email <a href="mailto:interlish9@gmail.com">privacy@interlish.app</a></p>
+                <p>Privacy questions? Email <a href="mailto:interlish9@gmail.com">interlish9@gmail.com</a></p>
             </div>
             
             <!-- Contact Section -->
@@ -522,20 +635,20 @@
                 
                 <div class="contact-grid">
                     <div class="contact-card">
-                        <h4>Support</h4>
-                        <p><a href="mailto:interlish9@gmail.com">support@interlish.app</a></p>
-                        <p>Technical issues and general help</p>
+                        <h4>General Support</h4>
+                        <p><a href="mailto:interlish9@gmail.com">interlish9@gmail.com</a></p>
+                        <p>Technical issues, account help, and general inquiries</p>
                     </div>
                     
                     <div class="contact-card">
-                        <h4>Privacy</h4>
-                        <p><a href="mailto:interlish9@gmail.com">privacy@interlish.app</a></p>
+                        <h4>Privacy Inquiries</h4>
+                        <p><a href="mailto:interlish9@gmail.com">interlish9@gmail.com</a></p>
                         <p>Data requests and privacy concerns</p>
                     </div>
                     
                     <div class="contact-card">
-                        <h4>Business</h4>
-                        <p><a href="mailto:interlish9@gmail.com">business@interlish.app</a></p>
+                        <h4>Business Inquiries</h4>
+                        <p><a href="mailto:interlish9@gmail.com">interlish9@gmail.com</a></p>
                         <p>Partnerships and opportunities</p>
                     </div>
                 </div>
@@ -544,7 +657,7 @@
                 <p>We typically respond within 24-48 hours on business days. For urgent issues, please mention "URGENT" in your subject line.</p>
                 
                 <h3>App Feedback</h3>
-                <p>Your feedback helps us improve. Share your thoughts, suggestions, or report bugs through the app's Settings → Send Feedback option.</p>
+                <p>Your feedback helps us improve. Share your thoughts, suggestions, or report bugs directly through email.</p>
             </div>
         </div>
     </main>
