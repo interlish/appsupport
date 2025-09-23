@@ -82,11 +82,22 @@
         }
         
         nav ul {
-            list-style: none;
+            list-style: none !important;
+            list-style-type: none !important;
             display: flex;
             gap: 18px;
             margin: 0;
             padding: 0;
+        }
+        
+        nav li {
+            list-style: none !important;
+            list-style-type: none !important;
+        }
+        
+        nav li::before {
+            content: none !important;
+            display: none !important;
         }
         
         nav a {
@@ -363,6 +374,18 @@
                 white-space: nowrap;
                 padding-right: 0;
                 min-width: max-content;
+                list-style: none !important;
+                list-style-type: none !important;
+            }
+            
+            nav li {
+                list-style: none !important;
+                list-style-type: none !important;
+            }
+            
+            nav li::before {
+                content: none !important;
+                display: none !important;
             }
             
             nav a {
@@ -738,12 +761,85 @@
     </footer>
     
     <script>
-        // Initialize navigation scroll position and ensure Support is visible
+        // Function to show a specific section
+        function showSection(sectionId, event) {
+            if (event) {
+                event.preventDefault();
+            }
+            
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Update nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Find and activate the corresponding nav link
+            const activeLink = document.querySelector(`a[href="#${sectionId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            // Update URL hash safely (avoiding pushState errors in iframe environments)
+            try {
+                // Try to update without page jump
+                if (window.location.hash !== '#' + sectionId) {
+                    window.location.hash = sectionId;
+                }
+            } catch (e) {
+                // Silently fail if in restricted environment
+                console.log('Hash update skipped in restricted environment');
+            }
+            
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Ensure nav is scrolled to show active item on mobile
+            if (window.innerWidth <= 768 && activeLink) {
+                const nav = activeLink.closest('nav');
+                if (nav) {
+                    const linkRect = activeLink.getBoundingClientRect();
+                    const navRect = nav.getBoundingClientRect();
+                    const scrollLeft = nav.scrollLeft + linkRect.left - navRect.left - 10;
+                    nav.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+                }
+            }
+        }
+        
+        // Load the correct section based on URL hash
+        function loadSectionFromHash() {
+            const hash = window.location.hash.slice(1); // Remove the #
+            if (hash && ['support', 'terms', 'privacy', 'contact'].includes(hash)) {
+                showSection(hash);
+            } else {
+                showSection('support'); // Default to support section
+            }
+        }
+        
+        // Initialize on page load
         window.addEventListener('DOMContentLoaded', function() {
+            // Initialize navigation scroll position
             const nav = document.querySelector('nav');
             if (nav) {
-                nav.scrollLeft = 0; // Ensure navigation starts from the beginning
+                nav.scrollLeft = 0;
             }
+            
+            // Load section from URL hash
+            loadSectionFromHash();
+        });
+        
+        // Handle browser back/forward buttons
+        window.addEventListener('hashchange', function() {
+            loadSectionFromHash();
         });
         
         // Handle resize to adjust navigation
@@ -760,39 +856,6 @@
                 }
             }
         });
-        
-        function showSection(sectionId, event) {
-            event.preventDefault();
-            
-            // Hide all sections
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-            
-            // Update nav links
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Smooth scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Ensure nav is scrolled to show active item on mobile
-            if (window.innerWidth <= 768) {
-                const activeLink = event.target;
-                const nav = activeLink.closest('nav');
-                if (nav && activeLink) {
-                    const linkRect = activeLink.getBoundingClientRect();
-                    const navRect = nav.getBoundingClientRect();
-                    const scrollLeft = nav.scrollLeft + linkRect.left - navRect.left - 10;
-                    nav.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-                }
-            }
-        }
     </script>
 </body>
 </html>
