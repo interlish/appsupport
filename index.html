@@ -761,11 +761,22 @@
     </footer>
     
     <script>
+        // Prevent default hash jump behavior
+        if (window.location.hash) {
+            window.scrollTo(0, 0);
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+            }, 1);
+        }
+        
         // Function to show a specific section
         function showSection(sectionId, event) {
             if (event) {
                 event.preventDefault();
             }
+            
+            // First, scroll to top
+            window.scrollTo(0, 0);
             
             // Hide all sections
             document.querySelectorAll('.content-section').forEach(section => {
@@ -789,34 +800,30 @@
                 activeLink.classList.add('active');
             }
             
-            // Update URL hash safely (avoiding pushState errors in iframe environments)
-            try {
-                // Try to update without page jump
-                if (window.location.hash !== '#' + sectionId) {
-                    window.location.hash = sectionId;
-                }
-            } catch (e) {
-                // Silently fail if in restricted environment
-                console.log('Hash update skipped in restricted environment');
-            }
-            
-            // Smooth scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Ensure we're at the top after section change
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+            }, 10);
             
             // Ensure nav is scrolled to show active item on mobile
             if (window.innerWidth <= 768 && activeLink) {
                 const nav = activeLink.closest('nav');
                 if (nav) {
-                    const linkRect = activeLink.getBoundingClientRect();
-                    const navRect = nav.getBoundingClientRect();
-                    const scrollLeft = nav.scrollLeft + linkRect.left - navRect.left - 10;
-                    nav.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+                    setTimeout(function() {
+                        const linkRect = activeLink.getBoundingClientRect();
+                        const navRect = nav.getBoundingClientRect();
+                        const scrollLeft = nav.scrollLeft + linkRect.left - navRect.left - 10;
+                        nav.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+                    }, 50);
                 }
             }
         }
         
         // Load the correct section based on URL hash
         function loadSectionFromHash() {
+            // Always start at the top
+            window.scrollTo(0, 0);
+            
             const hash = window.location.hash.slice(1); // Remove the #
             if (hash && ['support', 'terms', 'privacy', 'contact'].includes(hash)) {
                 showSection(hash);
@@ -827,18 +834,30 @@
         
         // Initialize on page load
         window.addEventListener('DOMContentLoaded', function() {
+            // Ensure we start at the top
+            window.scrollTo(0, 0);
+            
             // Initialize navigation scroll position
             const nav = document.querySelector('nav');
             if (nav) {
                 nav.scrollLeft = 0;
             }
             
-            // Load section from URL hash
-            loadSectionFromHash();
+            // Load section from URL hash after a brief delay
+            setTimeout(function() {
+                loadSectionFromHash();
+            }, 50);
+        });
+        
+        // Also handle the load event to ensure top position
+        window.addEventListener('load', function() {
+            window.scrollTo(0, 0);
         });
         
         // Handle browser back/forward buttons
-        window.addEventListener('hashchange', function() {
+        window.addEventListener('hashchange', function(e) {
+            e.preventDefault();
+            window.scrollTo(0, 0);
             loadSectionFromHash();
         });
         
