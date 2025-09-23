@@ -177,25 +177,31 @@
             line-height: 1.65;
         }
         
-        ul {
+        /* Content lists */
+        .content-section ul {
             margin: 16px 0 32px 0;
-            list-style: none;
-            padding-left: 24px;
+            list-style-type: none !important;
+            list-style: none !important;
+            padding-left: 20px;
         }
         
-        li {
+        .content-section li {
             color: var(--secondary);
             margin-bottom: 12px;
             position: relative;
             font-size: 17px;
             line-height: 1.65;
+            list-style-type: none !important;
+            list-style: none !important;
         }
         
-        li::before {
+        .content-section li::before {
             content: '•';
             position: absolute;
-            left: -20px;
+            left: -18px;
             color: var(--secondary);
+            font-size: 20px;
+            line-height: 1.2;
         }
         
         /* Contact Cards */
