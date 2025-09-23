@@ -179,12 +179,13 @@
         
         ul {
             margin: 16px 0 32px 0;
+            list-style: none;
+            padding-left: 24px;
         }
         
         li {
             color: var(--secondary);
             margin-bottom: 12px;
-            padding-left: 24px;
             position: relative;
             font-size: 17px;
             line-height: 1.65;
@@ -193,7 +194,7 @@
         li::before {
             content: '•';
             position: absolute;
-            left: 0;
+            left: -20px;
             color: var(--secondary);
         }
         
